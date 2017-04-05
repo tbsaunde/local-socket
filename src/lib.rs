@@ -7,11 +7,13 @@ use std::path::Path;
 use std::io::{Result, Read, Write};
 
 #[cfg(windows)]
+#[derive(Debug)]
 pub struct LocalStream {
     stream: PipeStream
 }
 
 #[cfg(unix)]
+#[derive(Debug)]
 pub struct LocalStream {
     stream: UnixStream
 }
