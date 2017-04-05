@@ -1,0 +1,7 @@
+[package]
+name = "local-socket"
+version = "0.1.0"
+authors = ["Trevor Saunders <tsaunders@mozilla.com>"]
+
+[dependencies]
+windows-named-pipe = "0.1.0"
