@@ -57,6 +57,7 @@ impl Write for LocalStream
 }
 
 #[cfg(unix)]
+#[derive(Debug)]
 pub struct LocalListener {
     listener: UnixListener
 }
