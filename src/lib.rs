@@ -2,7 +2,7 @@ extern crate windows_named_pipe;
 
 #[cfg(windows)]
 use windows_named_pipe::*;
-use std::os::unix::net::*;
+#[cfg(unix)] use std::os::unix::net::*;
 use std::path::Path;
 use std::io::{Result, Read, Write};
 
@@ -77,7 +77,7 @@ impl LocalListener {
     }
 
     #[cfg(windows)]
-    pub fn bind<P: AsRef<Path>>(path: P) -> Result<self>
+    pub fn bind<P: AsRef<Path>>(path: P) -> Result<Self>
     {
         match PipeListener::bind(path) {
             Ok(l) => Ok(LocalListener{ listener: l }),
@@ -85,10 +85,20 @@ impl LocalListener {
         }
     }
 
+    #[cfg(unix)]
     pub fn accept(&mut self) -> Result<LocalStream>
     {
         match self.listener.accept() {
             Ok((stream, _)) => Ok(LocalStream{ stream: stream }),
+            Err(x) => Err(x)
+        }
+    }
+
+    #[cfg(windows)]
+    pub fn accept(&mut self) -> Result<LocalStream>
+    {
+        match self.listener.accept() {
+            Ok(stream) => Ok(LocalStream{ stream: stream }),
             Err(x) => Err(x)
         }
     }
