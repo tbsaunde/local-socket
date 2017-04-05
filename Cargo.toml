@@ -4,4 +4,4 @@ version = "0.1.0"
 authors = ["Trevor Saunders <tsaunders@mozilla.com>"]
 
 [dependencies]
-windows-named-pipe = "0.1.0"
+windows-named-pipe = { git="https://github.com/tbsaunde/windows-named-pipe" }
